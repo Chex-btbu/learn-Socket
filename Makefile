@@ -4,8 +4,8 @@
 simple_server_objects = ServerSocket.o Socket.o servermain.o
 simple_client_objects = ClientSocket.o Socket.o clientmain.o
 
-GPP = arm-none-linux-gnueabi-g++
-
+#GPP = arm-none-linux-gnueabi-g++
+GPP = g++ -pthread
 
 all : simple_server simple_client
 

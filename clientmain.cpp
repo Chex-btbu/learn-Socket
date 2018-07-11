@@ -10,14 +10,14 @@ int main ( int argc, int argv[] )
   std::string strPort = "";
   try
     {
-      std::cout << "please input ip to connect:\n"
+      std::cout << "please input ip to connect:\n";
       std::cin >> strIp;
-      std::cout << "please input port to connect\n"
+      std::cout << "please input port to connect\n";
       std::cin >> strPort;
-      std::cout << "connecting Ip: " << strIp << " Port: " << strport;
+      std::cout << "connecting Ip: " << strIp << " Port: " << strPort;
 
 
-      ClientSocket client_socket ( "localhost", 30000 );
+      ClientSocket client_socket ( strIp, 30000 );
 
       std::string reply;
       std::string getStr;
@@ -35,7 +35,7 @@ int main ( int argc, int argv[] )
       }
 
     }
-  catch ( SocketException& e )
+    catch ( SocketException& e )
     {
       std::cout << "Exception was caught:" << e.description() << "\n";
     }
