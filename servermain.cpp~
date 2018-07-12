@@ -6,28 +6,9 @@
 
 static bool isruning;
 
-void* getinput( void* args  )
+void* startServer( void* args  )
 {
-	std::string sr = "v";	
-	while(isruning)
-	{
-		std::cin >> sr;
-		if(sr.compare("c")==0)
-		{
-			isruning = false;
-		}
-	}
-}
-
-int main ( int argc, int argv[] )
-{
-	isruning = true;
-
-	std::cout << "running....\n";
-
-	pthread_t t;
-	pthread_create(&t,NULL,getinput,NULL);
-	
+	std::cout << "Server running....\n";
 	try
 	{
 		// Create the socket
@@ -53,7 +34,26 @@ int main ( int argc, int argv[] )
 	{
 		std::cout << "Exception was caught:" << e.description() << "\nExiting.\n";
 	}
-	pthread_exit(NULL);
+}
+
+int main ( int argc, int argv[] )
+{
+	isruning = true;
+
+	pthread_t t;
+	pthread_create(&t,NULL,startServer,NULL);
+	
+	std::cout<<"if you want to stop Server input c!\n"
+	std::string sr = "v";	
+	while(isruning)
+	{
+		std::cin >> sr;
+		if(sr.compare("c")==0)
+		{
+			isruning = false;
+		}
+	}
+	
 
 	return 0;
 }
