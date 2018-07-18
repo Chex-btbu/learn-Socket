@@ -1,12 +1,14 @@
 #include "ServerSocket.h"
 #include "SocketException.h"
 #include <string>
-#include <pthread.h>
 #include "ServerSocket.h"
 
-static bool isruning;
-
 void* startServer( void* args  )
+{
+	
+}
+
+int main ( int argc, int argv[] )
 {
 	std::cout << "Server running....\n";
 	try
@@ -14,13 +16,13 @@ void* startServer( void* args  )
 		// Create the socket
 		ServerSocket server ( 30000 );
 		
-		while ( isruning )
+		while ( 1 )
 		{
 			ServerSocket new_sock;
 			server.accept ( new_sock );
 			try
 			{
-				while ( isruning )
+				while ( 1 )
 				{
 					std::string data;
 					new_sock >> data;
@@ -33,25 +35,6 @@ void* startServer( void* args  )
 	catch ( SocketException& e )
 	{
 		std::cout << "Exception was caught:" << e.description() << "\nExiting.\n";
-	}
-}
-
-int main ( int argc, int argv[] )
-{
-	isruning = true;
-
-	pthread_t t;
-	pthread_create(&t,NULL,startServer,NULL);
-	
-	std::cout<<"if you want to stop Server input c!\n"
-	std::string sr = "v";	
-	while(isruning)
-	{
-		std::cin >> sr;
-		if(sr.compare("c")==0)
-		{
-			isruning = false;
-		}
 	}
 	
 
